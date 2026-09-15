@@ -1,6 +1,9 @@
 venv/
 .env
 __pycache__/
-*.pyc
+*.py[cod]
 data/processed/
-
+data/documents/uploaded_contract.pdf
+.streamlit/
+.vscode/
+.idea/
