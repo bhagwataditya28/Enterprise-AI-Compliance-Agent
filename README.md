@@ -710,22 +710,3 @@ Through this project, I gained practical experience with:
 * Git and GitHub project management
 * Evaluation-driven development
 
----
-
-# 👨‍💻 Author
-
-**Aditya Bhagwat**
-
-B.Tech Artificial Intelligence | Risk & Compliance | Python | SQL | Generative AI | RAG
-
-GitHub: [@bhagwataditya28](https://github.com/bhagwataditya28)
-
----
-
-## ⚖️ Disclaimer
-
-This project is intended for **educational, portfolio, and demonstration purposes only**.
-
-The synthetic contract and generated findings are not intended to represent actual legal, regulatory, financial, or compliance advice.
-
-No confidential Citi, client, or proprietary information is included in this project.
