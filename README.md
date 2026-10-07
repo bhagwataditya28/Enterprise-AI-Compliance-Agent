@@ -1,4 +1,4 @@
-# Enterprise AI Compliance & Contract Risk Agent
+# AI Contract Risk Analyzer
 
 An AI-powered contract analysis application that uses **Retrieval-Augmented Generation (RAG), semantic search, and a local Large Language Model (LLM)** to identify potential contractual compliance and operational risks.
 
@@ -10,13 +10,13 @@ The application analyzes contract documents and produces **structured risk findi
 
 ## 🎯 Why I Built This
 
-This project was built to gain practical hands-on experience with **Generative AI, RAG pipelines, semantic search, LLM integration, and AI-based risk analysis**, while connecting these technologies with my previous experience in **Risk & Compliance, Python, SQL, and automation**.
+I built this project to gain practical hands-on experience with **Generative AI, RAG pipelines, semantic search, LLM integration, and AI-based risk analysis**, while connecting these technologies with my previous experience in **Risk & Compliance, Python, SQL, and automation**.
 
 The goal was to build a practical AI application rather than a simple chatbot.
 
-The system focuses on a realistic enterprise use case:
+The system focuses on a realistic use case:
 
-**Can an AI system analyze a contract, retrieve the relevant evidence, identify potential contractual risks, and generate an explainable risk report?**
+> **Can an AI system analyze a contract, retrieve relevant evidence, identify potential contractual risks, and generate an explainable risk report?**
 
 ---
 
@@ -32,12 +32,12 @@ The system then:
 4. Stores the processed content in a local knowledge base.
 5. Converts the user's analysis request into an embedding.
 6. Retrieves the most relevant contract sections using semantic similarity.
-7. Sends only the retrieved evidence to the local Qwen3 LLM.
+7. Sends the retrieved evidence to the local Qwen3 LLM.
 8. Extracts structured contractual risk findings.
 9. Normalizes risk categories.
 10. Assigns severity and numerical risk scores.
 11. Runs deterministic compliance checks.
-12. Generates a professional contract risk report.
+12. Generates a structured contract risk report.
 
 ---
 
@@ -71,7 +71,7 @@ The system then:
                          │ Local Knowledge Base│
                          └──────────┬──────────┘
                                     │
-                           User Analysis Query
+                            User Analysis Query
                                     │
                                     ▼
                          ┌─────────────────────┐
@@ -124,7 +124,7 @@ The core of the project is a simple Retrieval-Augmented Generation pipeline.
 
 The PDF is processed using `pypdf`.
 
-Instead of treating the document as one large text block, the application preserves the **page number and extracted text**.
+The application preserves the **page number and extracted text** instead of treating the document as one large text block.
 
 Example:
 
@@ -170,12 +170,12 @@ The retrieved contract evidence is provided to Qwen3 through a controlled prompt
 
 The LLM is instructed to:
 
-* Use only the supplied contract evidence
-* Avoid inventing information
-* Return structured JSON
-* Include supporting evidence
-* Include the contract page
-* Identify contractual gaps rather than making unsupported legal claims
+- Use only the supplied contract evidence
+- Avoid inventing information
+- Return structured JSON
+- Include supporting evidence
+- Include the contract page
+- Identify contractual gaps rather than making unsupported legal claims
 
 This allows the LLM to reason over relevant contract content without requiring the entire document to be placed into the prompt.
 
@@ -204,10 +204,10 @@ The application then processes the result through additional deterministic compo
 
 Examples include:
 
-* Information Security
-* Data Retention
-* Business Continuity
-* Other contractual risk categories
+- Information Security
+- Data Retention
+- Business Continuity
+- Other contractual risk categories
 
 ### Severity
 
@@ -229,11 +229,11 @@ The project does not rely entirely on the LLM.
 
 It also contains deterministic checks for selected contractual requirements, including:
 
-* Security requirements
-* Security incident notification
-* Data deletion
-* Audit rights
-* Business continuity
+- Security requirements
+- Security incident notification
+- Data deletion
+- Audit rights
+- Business continuity
 
 Example:
 
@@ -261,7 +261,7 @@ LLM-based analysis
         +
 Deterministic checks
         ↓
-More structured risk assessment
+Structured risk assessment
 ```
 
 ---
@@ -272,11 +272,11 @@ A key design goal of the project is to reduce unsupported LLM-generated findings
 
 The risk-analysis prompt explicitly instructs the model to:
 
-* Use only retrieved contract evidence
-* Not introduce outside information
-* Not invent contractual requirements
-* Not claim legal non-compliance without evidence
-* Return no risks when the evidence does not support a finding
+- Use only retrieved contract evidence
+- Not introduce outside information
+- Not invent contractual requirements
+- Not claim legal non-compliance without evidence
+- Return no risks when the evidence does not support a finding
 
 ### Unsupported Question Test
 
@@ -305,11 +305,11 @@ This test is intended to verify that the application does not automatically gene
 
 The project includes a focused evaluation test set covering three contractual risk categories:
 
-| Test Case            | Expected Category    | Result |
-| -------------------- | -------------------- | ------ |
+| Test Case | Expected Category | Result |
+|---|---|---|
 | Information Security | Information Security | ✅ PASS |
-| Data Retention       | Data Retention       | ✅ PASS |
-| Business Continuity  | Business Continuity  | ✅ PASS |
+| Data Retention | Data Retention | ✅ PASS |
+| Business Continuity | Business Continuity | ✅ PASS |
 
 ### Evaluation Result
 
@@ -318,7 +318,7 @@ Tests Passed: 3 / 3
 Evaluation Accuracy: 100%
 ```
 
-**Important:** This represents performance on the three included evaluation cases only. It should **not** be interpreted as general model accuracy or production-level accuracy.
+> **Important:** The 100% result represents performance on the three included evaluation cases only. It should not be interpreted as general model accuracy or production-level accuracy.
 
 The project also includes a separate unsupported-question/hallucination test.
 
@@ -328,16 +328,52 @@ The project also includes a separate unsupported-question/hallucination test.
 
 The project includes a Streamlit interface that allows a user to:
 
-* Upload a contract PDF
-* Run contract analysis
-* View identified risks
-* View severity and risk scores
-* View supporting evidence
-* View contract page references
-* View compliance checks
-* Download the generated report
+- Upload a contract PDF
+- Run contract analysis
+- View identified risks
+- View severity and risk scores
+- View supporting evidence
+- View contract page references
+- View compliance checks
+- Download the generated report
 
 The same analysis pipeline can also be executed from the command line.
+
+---
+
+# 📸 Screenshots
+
+## 1. Application Overview
+
+The Streamlit application provides a simple interface for uploading a contract and starting the analysis.
+
+![Application Overview](screenshots/01-app-overview.png)
+
+---
+
+## 2. Risk Analysis Results
+
+The application displays the overall risk score, risk level, identified risk categories, and compliance findings.
+
+![Risk Analysis](screenshots/02-risk-analysis.png)
+
+---
+
+## 3. Generated Risk Report
+
+The system generates a structured report containing risk findings, evidence, severity, recommendations, and compliance checks.
+
+![Generated Risk Report](screenshots/03-generated-report.png)
+
+---
+
+## 4. Project Architecture
+
+High-level workflow showing how the document moves through extraction, chunking, embeddings, semantic retrieval, RAG, risk analysis, and report generation.
+
+![Architecture](screenshots/04-architecture.png)
+
+> **Note:** Screenshots are from the local Streamlit application and use a synthetic contract created specifically for testing.
 
 ---
 
@@ -393,18 +429,164 @@ Status  : GAP
 
 # 🛠️ Technology Stack
 
-| Technology                | Purpose                              |
-| ------------------------- | ------------------------------------ |
-| **Python**                | Application development              |
-| **PyPDF**                 | PDF text extraction                  |
-| **Sentence Transformers** | Text embeddings                      |
-| **all-MiniLM-L6-v2**      | Local embedding model                |
-| **NumPy**                 | Vector similarity calculations       |
-| **Ollama**                | Local LLM runtime                    |
-| **Qwen3 4B**              | Local language model                 |
-| **Streamlit**             | Web interface                        |
-| **JSON**                  | Knowledge base and structured output |
-| **Git/GitHub**            | Version control                      |
+| Technology | Purpose |
+|---|---|
+| **Python** | Application development |
+| **PyPDF** | PDF text extraction |
+| **Sentence Transformers** | Text embeddings |
+| **all-MiniLM-L6-v2** | Local embedding model |
+| **NumPy** | Vector similarity calculations |
+| **Ollama** | Local LLM runtime |
+| **Qwen3 4B** | Local language model |
+| **Streamlit** | Web interface |
+| **JSON** | Knowledge base and structured output |
+| **Git/GitHub** | Version control |
 
 ---
 
+# 📂 Project Structure
+
+```text
+Enterprise-AI-Compliance-Agent/
+│
+├── app/
+│   ├── document_loader.py
+│   ├── chunker.py
+│   ├── embeddings.py
+│   ├── search.py
+│   ├── build_knowledge_base.py
+│   ├── llm.py
+│   ├── rag.py
+│   ├── category_normalizer.py
+│   ├── risk_scoring.py
+│   ├── compliance_checker.py
+│   ├── report_generator.py
+│   ├── risk_agent.py
+│   ├── evaluation.py
+│   ├── hallucination_test.py
+│   ├── logger.py
+│   └── streamlit_app.py
+│
+├── data/
+│   ├── documents/
+│   └── processed/
+│
+├── screenshots/
+│   ├── 01-app-overview.png
+│   ├── 02-risk-analysis.png
+│   ├── 03-generated-report.png
+│   └── 04-architecture.png
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# 🚀 How to Run
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/bhagwataditya28/Enterprise-AI-Compliance-Agent.git
+cd Enterprise-AI-Compliance-Agent
+```
+
+### 2. Create and activate the virtual environment
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+### 4. Make sure Ollama is installed
+
+Check available models:
+
+```powershell
+ollama list
+```
+
+Make sure the Qwen3 model is available:
+
+```powershell
+ollama run qwen3:4b
+```
+
+### 5. Build the knowledge base
+
+```powershell
+python -m app.build_knowledge_base
+```
+
+### 6. Start the Streamlit application
+
+```powershell
+streamlit run app/streamlit_app.py
+```
+
+The application will open in your browser.
+
+---
+
+# 🔐 Security & Data Privacy
+
+- No real Citi or client documents are used.
+- The repository uses a fully synthetic contract.
+- The LLM runs locally through Ollama.
+- No external LLM API is required.
+- Secrets and environment-specific files are excluded from Git.
+- The project is a portfolio/learning prototype and is not intended to replace professional compliance or legal review.
+
+---
+
+# ⚠️ Current Limitations
+
+This is intentionally a **basic portfolio prototype**, not a production enterprise platform.
+
+Current limitations include:
+
+- Text-based PDF processing
+- Fixed-size chunking
+- Small local LLM
+- Local JSON knowledge base
+- Small evaluation dataset
+- Limited compliance rules
+- No authentication or role-based access
+- No production database or vector database
+- No OCR pipeline for scanned documents
+- Human review is still required for final decisions
+
+---
+
+# 🔮 Possible Future Improvements
+
+If this prototype were extended further, possible improvements could include:
+
+- Clause-aware document chunking
+- OCR for scanned contracts
+- Production vector database
+- Larger and more diverse evaluation datasets
+- Stronger LLM infrastructure
+- Automated schema validation
+- Authentication and role-based access
+- Audit logging and monitoring
+- Human-in-the-loop review workflow
+- Support for multiple contract formats
+
+---
+
+# 👨‍💻 Author
+
+**Aditya Bhagwat**
+
+B.Tech Artificial Intelligence | Risk & Compliance | Python | SQL | Generative AI
+
+GitHub:  
+https://github.com/bhagwataditya28
